@@ -20,6 +20,7 @@ services:
   service-db:
     # IMPORTANT(JEFF): The version of postgres used may be specific to
     # the project you are setting up. Check with the documentation!
+    # https://hub.docker.com/_/postgres
     image: postgres:15
     container_name: service-db
     expose:
@@ -44,10 +45,7 @@ services:
       - service-db
     expose:
       - 3000
-    environment:
-      - "TZ=America/Chicago"
-      - "LC_TIME=C.UTF-8"
-    image: user/image:tag
+    image: user/image:${SERVICE_TAG:-latest}
     container_name: service-server
     restart: unless-stopped
     volumes:
@@ -64,9 +62,6 @@ services:
       - traefik-proxy
     ports:
       - ${SERVICE_WEB_PORT:-3000}:80
-    environment:
-      - "TZ=America/Chicago"
-      - "LC_TIME=C.UTF-8"
     # https://hub.docker.com/_/nginx
     image: nginx:alpine
     container_name: service-proxy
