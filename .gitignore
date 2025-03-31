@@ -7,4 +7,6 @@ dist/**
 #!.env.development
 #!.env.production
 
+mounts/**
+
 tmp/**
