@@ -1,0 +1,57 @@
+# compose.yml:jeff
+#
+# Docker compose template
+#
+---
+
+networks:
+  traefik-proxy:
+    driver: overlay
+    external: true
+  db:
+  www:
+
+volumes:
+  data:
+
+services:
+
+  #service-db:
+  
+  service-server:
+    env_file:
+      - .env
+    networks:
+      - traefik-proxy
+    expose:
+      - 3000
+    environment:
+      - "TZ=America/Chicago"
+      - "LC_TIME=C.UTF-8"
+    image: user/image:tag
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/ssl/certs:/etc/ssl/certs:ro
+      - data:/data:rw
+    
+  service-proxy:
+    env_file:
+      - .env
+    networks:
+      - traefik-proxy
+    ports:
+      - 3000:80
+    environment:
+      - "TZ=America/Chicago"
+      - "LC_TIME=C.UTF-8"
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/ssl/certs:/etc/ssl/certs:ro
+      - data:/var/www/html:ro
+    labels:
+      - "traefik.enable=true"
+      # - "traefik.
+    
