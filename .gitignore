@@ -1,0 +1,10 @@
+
+build/**
+dist/**
+
+.env*
+!.env.dist
+#!.env.development
+#!.env.production
+
+tmp/**
