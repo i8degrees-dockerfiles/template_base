@@ -3,7 +3,7 @@
 
 ## BSD 2-Clause License
 
-Copyright (c) 2025, JEFFREY CARPENTER <jeff+dockerfiles@479831.xyz> 
+Copyright (c) 2025, JEFFREY CARPENTER <1329364+i8degrees@users.noreply.github.com>
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
